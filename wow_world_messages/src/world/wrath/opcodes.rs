@@ -456,7 +456,7 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),
@@ -8185,7 +8185,7 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),
