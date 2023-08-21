@@ -118,9 +118,9 @@ macro_rules! update_item {
 
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq, PartialOrd)]
         pub struct $name {
-            header: Vec<u32>,
-            dirty_mask: Vec<u32>,
-            values: std::collections::BTreeMap<u16, u32>,
+            pub header: Vec<u32>,
+            pub dirty_mask: Vec<u32>,
+            pub values: std::collections::BTreeMap<u16, u32>,
         }
 
         impl $name {
